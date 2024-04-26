@@ -1,0 +1,6 @@
+<button (click)="createLobby()">Create lobby</button>
+<label>
+  or join existing
+  <input #lobbyInput (keyup.enter)="joinLobby(lobbyInput.value)" />
+</label>
+<button (click)="joinLobby(lobbyInput.value)">Join</button>

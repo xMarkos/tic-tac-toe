@@ -1,0 +1,26 @@
+:host {
+  display: contents;
+}
+
+div {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  border: 1px solid black;
+}
+
+.player-1 {
+  background-image: url(@assets/cross.png);
+}
+
+.player-2 {
+  background-image: url(@assets/circle.png);
+}
+
+.highlight {
+  background-color: yellow;
+}
+
+:host-context(app-board.active) .player-0:hover {
+  cursor: pointer;
+}

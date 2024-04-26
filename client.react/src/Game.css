@@ -1,0 +1,19 @@
+.game {
+	display: flex;
+}
+
+	.game > .info > div {
+		display: grid;
+		margin-left: 10px;
+		grid-template-columns: auto auto;
+		grid-column-gap: 2px;
+		align-items: center;
+	}
+
+.status {
+	display: grid;
+	grid-template-columns: auto auto;
+	grid-column-gap: 5px;
+	width: fit-content;
+	margin-top: 10px;
+}

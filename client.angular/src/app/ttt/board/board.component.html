@@ -1,0 +1,7 @@
+@for (row of fields; track y; let y = $index) {
+<div style="display: flex;">
+  @for (item of row; track x; let x = $index) {
+  <app-field (click)="onItemClicked(x, y)" [player]="item" [highlight]="shouldHighlight(x, y)" />
+  }
+</div>
+}

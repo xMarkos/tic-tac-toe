@@ -1,0 +1,22 @@
+.field {
+	display: inline-block;
+	width: 32px;
+	height: 32px;
+	border: 1px solid black;
+}
+
+	.field.player-1 {
+		background-image: url(assets/cross.png);
+	}
+
+	.field.player-2 {
+		background-image: url(assets/circle.png);
+	}
+
+	.field.highlight {
+		background-color: yellow;
+	}
+
+.board.active .field.player-0:hover {
+	cursor: pointer;
+}

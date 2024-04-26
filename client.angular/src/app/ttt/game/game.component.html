@@ -1,0 +1,28 @@
+<p style="cursor: pointer;" title="Click to copy URL" (click)="copyUrl()">Lobby number: {{gameId}}</p>
+<div class="game">
+  <app-board [fields]="board" [highlight]="winningFields" (itemClicked)="itemClicked($event.x, $event.y)" [class.active]="myPlayerNumber === currentPlayer" />
+  <div class="info">
+    <div>
+      <div>You are: </div><app-field [player]="myPlayerNumber" />
+      @if(!isComplete) {
+      <div>Now plays: </div><app-field [player]="currentPlayer" />
+      }
+      @else {
+      <div>Winner: </div><app-field [player]="winner!" />
+      }
+    </div>
+  </div>
+</div>
+<div class="status">
+  <span>Players</span>
+  <span>{{playerCount}}</span>
+  <span>Turns</span>
+  <span>{{turnCount}}</span>
+  <span>Wins</span>
+  <span>{{points[myPlayerNumber]}}</span>
+  <span>Losses</span>
+  <span>{{points[(myPlayerNumber % 2) + 1]}}</span>
+  <span>Draws</span>
+  <span>{{points[0]}}</span>
+</div>
+<button (click)="restartGame()">Restart!</button>

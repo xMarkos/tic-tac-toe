@@ -1,0 +1,9 @@
+.board {
+	display: block;
+	border: 1px solid black;
+	width: fit-content;
+}
+
+	.board[hidden] {
+		display: none;
+	}
