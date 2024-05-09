@@ -9,7 +9,12 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        builder.Services.AddControllers();
+        builder.Services.AddControllers()
+            .ConfigureApplicationPartManager(c =>
+            {
+                c.FeatureProviders.Add(new InternalControllerProvider());
+            });
+
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 

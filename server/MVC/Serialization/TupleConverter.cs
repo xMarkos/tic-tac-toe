@@ -7,7 +7,7 @@ namespace Markos.TicTacToe.MVC.Serialization;
 /// <summary>
 /// Creates converter for serializing C# value tuples into fixed length JSON arrays.
 /// </summary>
-public class TupleConverterFactory : JsonConverterFactory
+internal class TupleConverterFactory : JsonConverterFactory
 {
     private readonly static TupleConverter _instance = new();
 

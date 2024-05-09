@@ -2,13 +2,16 @@
 namespace Markos.TicTacToe.Game;
 
 /// <summary>
-/// Manages instances of <see cref="TicTacToeGame"/>, cleaning-up stale objects.
+/// Manages instances of <see cref="TicTacToeGame"/>.
 /// </summary>
+/// <remarks>
+/// A scan runs every minute which cleans up lobbies without active connected clients.
+/// </remarks>
 internal sealed class TicTacToeGameManager : IDisposable
 {
     private readonly CancellationTokenSource _cts;
 
-    private int counter = 0;
+    private int _counter = 0;
     private readonly Dictionary<string, TicTacToeGame> _games = [];
 
     /// <summary>
@@ -72,7 +75,7 @@ internal sealed class TicTacToeGameManager : IDisposable
     {
         TicTacToeGame result = new();
 
-        string id = $"{++counter}";
+        string id = $"{++_counter}";
         _games.Add(id, result);
 
         return Task.FromResult((id, result));

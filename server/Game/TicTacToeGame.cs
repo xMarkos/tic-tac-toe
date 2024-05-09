@@ -9,7 +9,7 @@ namespace Markos.TicTacToe.Game;
 /// <summary>
 /// Represents an instance of Tic-Tac-Toe game.
 /// </summary>
-public class TicTacToeGame : IDisposable
+internal class TicTacToeGame : IDisposable
 {
     private readonly static JsonSerializerOptions _serializerOptions = new(JsonSerializerDefaults.Web)
     {
