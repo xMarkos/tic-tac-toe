@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { generateId } from '/idgen';
+import { generateId } from '/idGen';
 
 const charPool = '0123456789abcdef';
 
