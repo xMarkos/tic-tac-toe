@@ -7,6 +7,3 @@ node_modules/
 *proj.user
 *.pubxml.user
 *.tsbuildinfo
-.terraform*
-credentials.auto.tfvars
-*.tfstate*

@@ -8,12 +8,10 @@ variable "azure_credentials" {
   sensitive = true
 }
 
-locals {
-  app_zip_file = "../out/tic-tac-toe.zip"
-  rg_name = "InterviewDemos"
-  plan_name = "plan-demos"
-  app_name = "yet-another-tic-tac-toe"
-}
+variable "app_zip_file" {}
+variable "rg_name" {}
+variable "plan_name" {}
+variable "app_name" {}
 
 terraform {
   required_providers {
@@ -33,23 +31,23 @@ provider "azurerm" {
 }
 
 data "azurerm_resource_group" "main" {
-  name = local.rg_name
+  name = var.rg_name
 }
 
 data "azurerm_service_plan" "main" {
-  name                = local.plan_name
+  name                = var.plan_name
   resource_group_name = data.azurerm_resource_group.main.name
 }
 
 resource "azurerm_windows_web_app" "app1" {
-  name                = local.app_name
+  name                = var.app_name
   resource_group_name = data.azurerm_resource_group.main.name
   location            = data.azurerm_service_plan.main.location
   service_plan_id     = data.azurerm_service_plan.main.id
   
   ftp_publish_basic_authentication_enabled = true
   https_only = true
-  #zip_deploy_file = local.app_zip_file
+  #zip_deploy_file = "../${var.app_zip_file}"
   
   app_settings = {
     WEBSITE_RUN_FROM_PACKAGE = "1"
@@ -81,5 +79,5 @@ resource "azurerm_windows_web_app" "app1" {
 }
 
 #resource "terraform_data" "app_package_hash" {
-#  input = filesha256(local.app_zip_file)
+#  input = filesha256("../${var.app_zip_file}")
 #}
