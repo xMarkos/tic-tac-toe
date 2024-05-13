@@ -1,5 +1,7 @@
+using Markos.TicTacToe.Controllers;
 using Markos.TicTacToe.Game;
 using Markos.TicTacToe.MVC;
+using System.Reflection;
 
 namespace Markos.TicTacToe;
 
@@ -16,7 +18,20 @@ public class Program
             });
 
         builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen();
+
+        builder.Services.AddSwaggerGen(c =>
+        {
+            if (Assembly.GetEntryAssembly() is Assembly a && Path.GetDirectoryName(a.Location) is string baseDir)
+            {
+                foreach (var item in from assemblyPath in Directory.EnumerateFiles(baseDir, "*.dll", SearchOption.AllDirectories)
+                                     let xmlDocPath = Path.ChangeExtension(assemblyPath, "xml")
+                                     where File.Exists(xmlDocPath)
+                                     select xmlDocPath)
+                {
+                    c.IncludeXmlComments(item, true);
+                }
+            }
+        });
 
         builder.Services.AddSingleton<IGameManager<TicTacToeGame>, TicTacToeGameManager>();
 

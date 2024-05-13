@@ -5,6 +5,8 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<RootNamespace>Markos.TicTacToe</RootNamespace>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<NoWarn>CS1573,CS1591</NoWarn>
 	</PropertyGroup>
 
 	<!--PropertyGroup>
