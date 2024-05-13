@@ -1,0 +1,45 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+  subscription: 'Azure-Markos-Free'
+
+steps:
+- task: NuGetToolInstaller@1
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solution)'
+
+- pwsh: |
+    $config = cat terraform/config.auto.tfvars.json | convertfrom-json
+    Write-Host "##vso[task.setvariable variable=app_zip_file;]$config.app_zip_file"
+    Write-Host "##vso[task.setvariable variable=rg_name;]$config.rg_name"
+    Write-Host "##vso[task.setvariable variable=app_name;]$config.app_name"
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'custom'
+    custom: 'publish'
+    arguments: '-c Release -o out/bin'
+
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: 'out/bin'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(app_zip_file)'
+
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: '$(subscription)'
+    appType: 'webApp'
+    appName: '$(app_name)'
+    package: '$(app_zip_file)'
+    deploymentMethod: 'runFromPackage'
