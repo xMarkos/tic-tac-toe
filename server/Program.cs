@@ -18,7 +18,7 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
-        builder.Services.AddSingleton<TicTacToeGameManager>();
+        builder.Services.AddSingleton<IGameManager<TicTacToeGame>, TicTacToeGameManager>();
 
         var app = builder.Build();
 

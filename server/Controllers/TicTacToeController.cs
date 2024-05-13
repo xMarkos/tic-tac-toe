@@ -8,9 +8,9 @@ namespace Markos.TicTacToe.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-internal class TicTacToeController(TicTacToeGameManager manager) : ControllerBase
+internal class TicTacToeController(IGameManager<TicTacToeGame> manager) : ControllerBase
 {
-    private readonly TicTacToeGameManager _manager = manager;
+    private readonly IGameManager<TicTacToeGame> _manager = manager;
 
     /// <summary>
     /// Creates a new lobby of Tic Tac Toe.

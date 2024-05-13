@@ -7,7 +7,7 @@ namespace Markos.TicTacToe.Game;
 /// <remarks>
 /// A scan runs every minute which cleans up lobbies without active connected clients.
 /// </remarks>
-internal sealed class TicTacToeGameManager : IDisposable
+internal sealed class TicTacToeGameManager : IDisposable, IGameManager<TicTacToeGame>
 {
     private readonly CancellationTokenSource _cts;
 
